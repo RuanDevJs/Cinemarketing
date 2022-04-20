@@ -1,5 +1,6 @@
 import React from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
+import Category from "../../Components/Category";
 
 import Header from "../../Components/Header";
 import Movies from "../../Components/Movies";
@@ -11,6 +12,7 @@ export default function Home() {
           bounces={false}
         >
           <Movies />
+          <Category />
         </ScrollView>
       </View>
     );

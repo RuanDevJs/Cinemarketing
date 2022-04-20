@@ -10,11 +10,16 @@ const ITEM_SIZE = Platform.OS === 'ios' ? width * 0.72 : width * 0.74;
 export default function Movie({ route }){
     const { movie } = route.params;
     const ImageAnimated = useRef(new Animated.Value(-600)).current;
-    const OpacityAnimated = useRef(new Animated.Value(0)).current;
+    const InfoAnimated = useRef(new Animated.Value(900)).current;
 
     useEffect(() => {
-        Animated.sequence([
+        Animated.parallel([
             Animated.timing(ImageAnimated, {
+                toValue: 0,
+                duration: 1000,
+                useNativeDriver: false
+            }),
+            Animated.timing(InfoAnimated, {
                 toValue: 0,
                 duration: 1000,
                 useNativeDriver: false
@@ -57,7 +62,11 @@ export default function Movie({ route }){
                     }}
                 /> 
             </ImageBackground>
-            <View style={styles.info}>
+            <Animated.View style={[styles.info, {
+                transform: [{
+                    translateY: InfoAnimated
+                }]
+            }]}>
                 <Genre
                     width={80}
                     padding={5}
@@ -90,7 +99,7 @@ export default function Movie({ route }){
                         <Text style={styles.buttonText}> comprar ingresso </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </Animated.View>
         </View>
     )
 }
