@@ -28,7 +28,7 @@ export default function Movie({ route }){
     }, []);
 
     return(
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#0E0F13' }}>
             <ImageBackground 
                 style={{
                     flex: 1,

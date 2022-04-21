@@ -10,7 +10,7 @@ import { getMovies } from '../Services/api';
 const { width, height } = Dimensions.get('window');
 const ITEM_SIZE = Platform.OS === 'ios' ? width * 0.72 : width * 0.74;
 
-export default function Movies(){
+export default function Movies({ data }){
     const [movies, setMovies] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -30,9 +30,9 @@ export default function Movies(){
 
     return( 
         <View style={styles.container}>
-            <Text style={styles.title}>Em cartaz</Text>
+            { data ? null : <Text style={styles.title}>Em cartaz</Text> }
             <Carousel
-                data={movies}
+                data={data ? data : movies}
                 renderItem={({ item, index }) => <Movie item={item} index={index} />}
                 sliderWidth={width}
                 itemWidth={220}
@@ -54,7 +54,6 @@ function Movie({ item, index }){
     const [active, setActive] = useState(false);
 
     function handlePress(){
-        console.log(item)
         navigate.push('Movie', {
             movie: item
         });
